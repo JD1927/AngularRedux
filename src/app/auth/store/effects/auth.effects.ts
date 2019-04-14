@@ -4,58 +4,46 @@ import { HttpClient } from '@angular/common/http';
 // NgRX Imports
 import { Actions, Effect, ofType } from '@ngrx/effects';
 // RxJS Imports
-import { Observable, from } from 'rxjs';
-import { tap, map, mergeMap } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { tap, map, mergeMap, exhaustMap, catchError, switchMap } from 'rxjs/operators';
 // Auth Actions imports
-import {
-  AuthActionTypes,
-  LoggedIn,
-  LogOut,
-  LoggedUser,
-  LoginUser,
-  LoginUserError
-} from '../actions/auth.actions';
+import * as fromAuthActions from '../actions/auth.actions';
+
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthEffects {
   constructor(
-    private http: HttpClient,
+    private router: Router,
     private actions$: Actions,
     private authService: AuthService) { }
 
   @Effect()
-  loginUserError$: Observable<any> = this.actions$.pipe(
-    ofType<LoginUserError>(AuthActionTypes.LoginUserError),
-    tap(x => console.log('LoggedAPI error', x.payload ),
+  loginUserError$ = this.actions$.pipe(
+    ofType(fromAuthActions.loginUserError),
     map(res => {
-      return { type: 'LOGIN_API_ERROR', payload: 'Email or password incorrect' };
+      return { type: 'LOGIN_API_ERROR', payload: 'Se presentó un error' };
     })
-    )
   );
 
   @Effect()
-  loginUser$: Observable<any> = this.actions$.pipe(
-    ofType<LoginUser>(AuthActionTypes.LoginUser),
-    tap(v => console.log('LoginUser effect', v),
-    map((res: any) => {
-      this.authService.login({
-        username: '',
-        email: res.payload.user,
-        password: res.payload.pass
-      });
+  loginUser$ = this.actions$.pipe(
+    ofType(fromAuthActions.loginUser),
+    map((res: any) => res.payload),
+    switchMap(auth => {
+      return this.authService.login(auth.user).pipe(
+        map(response => new fromAuthActions.LoggedUser(response)),
+        catchError(error => of(new fromAuthActions.LoginUserError(error)))
+      );
     })
-    )
   );
 
-  @Effect()
-  LoggedUser$: Observable<any> = this.actions$.pipe(
-    ofType<LoginUserError>(AuthActionTypes.LoginUserError),
-    tap(v => console.log('LoggedUser payload', v.payload ),
-    map(res => {
-      return { type: '', payload: res };
-    })
-    )
+  @Effect({ dispatch: false })
+  LoggedUser$ = this.actions$.pipe(
+    ofType(fromAuthActions.loggedUser),
+    tap(x => this.router.navigate(['/chats']))
   );
 }

@@ -30,8 +30,6 @@ export const reducers: ActionReducerMap<State<any>|any> = {
 export function logger(reducer: ActionReducer<State<any>>) {
   // tslint:disable-next-line:only-arrow-functions
   return function(state: State<any>, action: any): State<any> {
-    console.log('state', state);
-    console.log('action', action);
     return reducer(state, action);
   };
 }
@@ -44,6 +42,21 @@ export const getAuthState = createFeatureSelector<fromAuth.AuthState>('auth');
 export const getAuth = createSelector(
   getAuthState,
   fromAuth.getAuthState
+);
+
+export const getAuthLoading = createSelector(
+  getAuthState,
+  fromAuth.getAuthLoading
+);
+
+export const getAuthError = createSelector(
+  getAuthState,
+  fromAuth.getAuthError
+);
+
+export const getAuthErrorMessage = createSelector(
+  getAuthState,
+  fromAuth.getAuthErrorMessage
 );
 
 

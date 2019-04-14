@@ -1,6 +1,9 @@
 <div>
   <form [formGroup]="userForm" (ngSubmit)="login()" class="form-signin">
     <h1 class="h3 mb-3 font-weight-normal text-center">Log in</h1>
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+      ¡{{errorMessage}} <span><i class="fas fa-frown"></i></span>!
+    </div>
     <div class="input-group mb-3 flex-nowrap">
       <div class="input-group-prepend">
         <span class="input-group-text" id="user-icon">
@@ -30,9 +33,16 @@
       <input type="password" formControlName="password" class="form-control" placeholder="Example: a1234567"
         aria-describedby="user-pwd">
     </div>
-
-    <button [disabled]="!userForm.valid" class="btn btn-lg btn-dark btn-block" type="submit">Sign in
-      <i class="fas fa-sign-in-alt"></i>
-    </button>
+    <div *ngIf="!isLoading">
+      <button [disabled]="!userForm.valid" class="btn btn-lg btn-dark btn-block" type="submit">Sign in
+        <i class="fas fa-sign-in-alt"></i>
+      </button>
+    </div>
+    <div *ngIf="isLoading">
+      <button class="btn btn-lg btn-block btn-dark" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
+    </div>
   </form>
 </div>

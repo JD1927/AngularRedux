@@ -1,16 +1,20 @@
 import { Action } from '@ngrx/store';
+import { IUser } from 'src/app/shared/interfaces/user.model';
 
-/**
- * For each action type in an action group, make a simple
- * enum object for all of this group's action types.
- */
-export enum AuthActionTypes {
+export enum AuthActionsType  {
   LoggedUser = '[Auth] LOGGED_USER',
   LoginUser = '[Auth] LOGIN_USER',
   LoginUserError = '[Auth] LOGIN_USER_ERROR',
   LoggedIn = '[Auth] LOGGED_IN',
-  LogOut = '[Auth] LOG_OUT'
+  LogOut = '[Auth] LOG_OUT',
 }
+
+
+export const loggedUser = '[Auth] LOGGED_USER';
+export const loginUser = '[Auth] LOGIN_USER';
+export const loginUserError = '[Auth] LOGIN_USER_ERROR';
+export const loggedIn = '[Auth] LOGGED_IN';
+export const logOut = '[Auth] LOG_OUT';
 
 /**
  * Every action is comprised of at least a type and an optional
@@ -18,37 +22,34 @@ export enum AuthActionTypes {
  * type checking in reducer functions.
  */
 export class LoggedIn implements Action {
-  readonly type = AuthActionTypes.LoggedIn;
+  readonly type = loggedIn;
 
   constructor(public payload: { isLogin: boolean }) { }
 }
 
 export class LogOut implements Action {
-  readonly type = AuthActionTypes.LogOut;
+  readonly type = logOut;
 
-  constructor(public payload: { isLogin: boolean }) { }
+  constructor(public payload: { isLogout: boolean }) { }
 }
 export class LoggedUser implements Action {
-  readonly type = AuthActionTypes.LoggedUser;
+  readonly type = loggedUser;
 
-  constructor(public payload: any) { }
+  constructor(public payload: { isLoading: boolean, error: boolean, user: IUser }) { }
 }
 
 export class LoginUserError implements Action {
-  readonly type = AuthActionTypes.LoginUserError;
+  readonly type = loginUserError;
 
   constructor(public payload: { error: string }) { }
 }
 export class LoginUser implements Action {
-  readonly type = AuthActionTypes.LoginUser;
+  readonly type = loginUser;
 
-  constructor(public payload: { user: string, pass: string }) { }
+  constructor(public payload: { user: IUser }) { }
 }
-
-
-
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type actions= LoggedIn | LogOut | LoggedUser | LoginUserError | LoginUser;
+export type actions = LoggedIn | LogOut | LoggedUser | LoginUserError | LoginUser;
