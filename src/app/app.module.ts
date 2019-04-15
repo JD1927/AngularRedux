@@ -25,6 +25,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { metaReducers, reducers } from './app-store/reducers/reducers';
 import { AuthModule } from './auth/auth.module';
 import { AuthEffects } from './auth/store/effects/auth.effects';
+import { DashboardModule } from './dashboard/dashboard.module';
 // NGRX Imports
 const NGRX_IMPORTS = [
   StoreModule.forRoot(reducers, { metaReducers }),

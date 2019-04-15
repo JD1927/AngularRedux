@@ -10,13 +10,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/effects/auth.effects';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [],
   imports: [
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    StoreModule.forFeature('auth', fromAuth.authReducer),
+    StoreModule.forFeature('auth', fromAuth.AuthReducer),
     EffectsModule.forFeature([AuthEffects])
   ]
 })

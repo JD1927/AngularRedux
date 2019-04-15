@@ -3,13 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthRoutingModule } from './auth/auth-routing.module';
 import { LoginComponent } from './auth/login/login.component';
 
-const routes: Routes = [
-  { path: '', component: LoginComponent }
-];
+const routes: Routes = [];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forChild(routes),
     AuthRoutingModule
   ],
   exports: [

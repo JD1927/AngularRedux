@@ -11,8 +11,6 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
   providers: [
     AlertService
   ],
-  exports: [
-    AlertService
-  ]
+  exports: []
 })
 export class SharedModule { }

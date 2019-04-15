@@ -23,12 +23,11 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<State<any>|any> = {
-  auth: fromAuth.authReducer,
+  auth: fromAuth.AuthReducer,
   router: fromRouter.routerReducer
 };
 
 export function logger(reducer: ActionReducer<State<any>>) {
-  // tslint:disable-next-line:only-arrow-functions
   return function(state: State<any>, action: any): State<any> {
     return reducer(state, action);
   };
@@ -53,10 +52,3 @@ export const getAuthError = createSelector(
   getAuthState,
   fromAuth.getAuthError
 );
-
-export const getAuthErrorMessage = createSelector(
-  getAuthState,
-  fromAuth.getAuthErrorMessage
-);
-
-
