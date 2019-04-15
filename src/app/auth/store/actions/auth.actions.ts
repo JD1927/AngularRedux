@@ -38,7 +38,7 @@ export class AuthError implements Action {
   constructor(public payload?: any) { }
 }
 
-export type auth = GetUser
+export type all = GetUser
 | Authenticated
 | NotAuthenticated
 | GoogleLogin
