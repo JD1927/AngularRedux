@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<nav class="my-navbar navbar navbar-expand-md fixed-top navbar-dark bg-dark sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -6,17 +6,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="#">Features</a>
-        <a class="nav-item nav-link" href="#">Pricing</a>
-        <div class="nav-item dropdown">
+        <a class="nav-item nav-link custom-align" routerLink="/dashboard/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a class="nav-item nav-link custom-align" routerLink="/dashboard/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Features</a>
+        <a class="nav-item nav-link custom-align" href="#">Pricing</a>
+        <div class="nav-item dropleft">
             <button class="btn btn-dark dropdown-toggle" type="button" id="userSession" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown button
+              <img [src]="user.photoURL" alt="" width="40px">
             </button>
             <div class="dropdown-menu" aria-labelledby="userSession">
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" href="#">Another action</a>
-              <button class="dropdown-item btn btn-danger" type="button" (click)="signOut()">Sign out!</button>
+              <button class="dropdown-item btn btn-danger" type="button" (click)="signOut()">
+                Sign out <i class="fas fa-sign-out-alt"></i>
+              </button>
             </div>
           </div>
       </div>

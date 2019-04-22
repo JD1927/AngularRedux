@@ -8,6 +8,9 @@
     <div *ngIf="error !== ''" class="alert alert-danger" role="alert">
       ¡{{error}} <span><i class="fas fa-frown"></i></span>!
     </div>
+    <div>
+      <img src="../../../assets/images/avengers.png" width="300px">
+    </div>
     <div *ngIf="!isLoading">
       <button *ngIf="!user?.uid" class="btn btn-lg btn-dark btn-block" type="button" (click)="signIn()">Sign in
         <i class="fas fa-sign-in-alt"></i>

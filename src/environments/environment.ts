@@ -7,12 +7,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyBxEGDg7uMwFUXtjQVbQSJbsoPrpzTxnSc',
-    authDomain: 'a-redux.firebaseapp.com',
-    databaseURL: 'https://a-redux.firebaseio.com',
-    projectId: 'a-redux',
-    storageBucket: 'a-redux.appspot.com',
-    messagingSenderId: '1032641608165'
+    apiKey: 'YOUR_API_KEY',
+    authDomain: 'YOUR_AUTH_DOMAIN',
+    databaseURL: 'YOUR_DATABASE_URL',
+    projectId: 'YOUR_PROJECT_ID',
+    storageBucket: 'YOUR_STORAGE_BUCKET',
+    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID'
   }
 };
 

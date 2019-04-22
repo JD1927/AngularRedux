@@ -17,7 +17,7 @@ import * as firebase from 'firebase/app';
 
 export type Action = AuthActions.all;
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthEffects {
   constructor(
     private afAuth: AngularFireAuth,

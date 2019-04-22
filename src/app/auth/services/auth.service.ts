@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { IUser } from 'src/app/shared/interfaces/user.model';
 import { delay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as fromAuth from '../../app-store/reducers/reducers';
@@ -18,6 +17,10 @@ export class AuthService {
 
   signOutGoogle(): void {
     this.store.dispatch(new authActions.LogOut());
+  }
+
+  getUser(): Observable<any> {
+    return this.store.select(fromAuth.getAuth);
   }
 
 }
