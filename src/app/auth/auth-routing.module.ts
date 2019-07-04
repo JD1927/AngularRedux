@@ -6,10 +6,10 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', loadChildren: './login/login.module#LoginModule' },
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   {
     path: 'dashboard',
-    loadChildren: '../dashboard/dashboard.module#DashboardModule',
+    loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '' }

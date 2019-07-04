@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 // NgRX Imports
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -8,8 +7,6 @@ import { Observable, from, of } from 'rxjs';
 import { tap, map, mergeMap, exhaustMap, catchError, switchMap, delay } from 'rxjs/operators';
 // Auth Actions imports
 import * as AuthActions from '../actions/auth.actions';
-
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../../models/user';

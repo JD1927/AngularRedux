@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
-      { path: 'home', loadChildren: './home/home.module#HomeModule' },
+      { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
       { path: '', pathMatch: 'full', redirectTo: 'home' },
       { path: '**', redirectTo: 'home'}
     ]
